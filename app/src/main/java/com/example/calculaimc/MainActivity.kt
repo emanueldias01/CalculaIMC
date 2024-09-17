@@ -19,29 +19,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CalculaImcTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AllScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun AllScreen(modifier: Modifier = Modifier){
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun AllScreenPreview() {
     CalculaImcTheme {
-        Greeting("Android")
+        AllScreen()
     }
 }
