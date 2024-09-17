@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CalculaImc</string>
     <string name="peso_txt">Digite seu peso: </string>
+    <string name="peso_label">Peso:</string>
     <string name="altura_txt">Digite sua altura: </string>
+    <string name="altura_label">Altura:</string>
 </resources>

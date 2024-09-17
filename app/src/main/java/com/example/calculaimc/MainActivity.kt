@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -89,7 +91,9 @@ fun TextFields(
         Text(text = stringResource(id = R.string.peso_txt))
         TextField(
             value = peso,
-            onValueChange = onChangePeso
+            onValueChange = onChangePeso,
+            label = { Text(text = stringResource(id = R.string.peso_label)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
 
         Spacer(modifier = Modifier.height(30.dp))
@@ -97,7 +101,9 @@ fun TextFields(
         Text(text = stringResource(id = R.string.altura_txt))
         TextField(
             value = altura,
-            onValueChange = onChangeAltura
+            onValueChange = onChangeAltura,
+            label = { Text(text = stringResource(id = R.string.altura_label)) },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
 
     }
