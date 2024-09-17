@@ -51,6 +51,8 @@ fun AllScreen(modifier: Modifier = Modifier){
     val peso = pesoInput.toDoubleOrNull() ?: 0.0
     val altura = alturaInput.toDoubleOrNull() ?: 0.0
 
+    var imc by remember { mutableStateOf("") }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,13 +69,25 @@ fun AllScreen(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        Button(onClick = { calculaImc(peso, altura) }) {
+        Button(onClick = {
+            var result = calculaImc(peso, altura)
+            imc = "Seu IMC é de : $result"
+        }) {
             Text(
                 modifier = Modifier.padding(5.dp),
                 text = "Calcular",
                 fontSize = 20.sp,
                 )
         }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = imc,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(30.dp)
+            
+        )
 
     }
 
@@ -112,7 +126,7 @@ fun TextFields(
 
 internal fun calculaImc(peso : Double, altura: Double) : String{
     val result = peso/(altura*altura)
-    return NumberFormat.getCurrencyInstance().format(result)
+    return NumberFormat.getNumberInstance().format(result)
 }
 
 @Preview(showBackground = true)
