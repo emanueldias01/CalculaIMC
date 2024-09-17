@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.calculaimc.ui.theme.CalculaImcTheme
+import java.text.NumberFormat
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +67,7 @@ fun AllScreen(modifier: Modifier = Modifier){
 
         Spacer(modifier = Modifier.height(50.dp))
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { calculaImc(peso, altura) }) {
             Text(
                 modifier = Modifier.padding(5.dp),
                 text = "Calcular",
@@ -107,6 +108,11 @@ fun TextFields(
         )
 
     }
+}
+
+internal fun calculaImc(peso : Double, altura: Double) : String{
+    val result = peso/(altura*altura)
+    return NumberFormat.getCurrencyInstance().format(result)
 }
 
 @Preview(showBackground = true)
