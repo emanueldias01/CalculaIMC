@@ -23,7 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,11 +47,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AllScreen(modifier: Modifier = Modifier){
 
+    var click by remember { mutableStateOf(false) }
     var pesoInput by remember { mutableStateOf("") }
     var alturaInput by remember{ mutableStateOf("") }
 
     val peso = pesoInput.toDoubleOrNull() ?: 0.0
     val altura = alturaInput.toDoubleOrNull() ?: 0.0
+
+    var result by remember { mutableStateOf("0.0") }
 
     var imc by remember { mutableStateOf("") }
 
@@ -70,8 +75,9 @@ fun AllScreen(modifier: Modifier = Modifier){
         Spacer(modifier = Modifier.height(50.dp))
 
         Button(onClick = {
-            var result = calculaImc(peso, altura)
+            result = calculaImc(peso, altura)
             imc = "Seu IMC é de : $result"
+            click = true
         }) {
             Text(
                 modifier = Modifier.padding(5.dp),
@@ -88,6 +94,29 @@ fun AllScreen(modifier: Modifier = Modifier){
             modifier = Modifier.padding(30.dp)
             
         )
+
+        Spacer(modifier = Modifier.height(20.dp))
+        var message : String = ""
+        if(click){
+            if(result >= 18.5.toString() && result <= 24.9.toString()){
+                message = "O seu indicie de massa corporal está saudável"
+            }
+            if(result >= 25.0.toString()){
+                message = "O seu indice de massa corporal está em sobrepeso"
+            }
+            if(result <= 18.4.toString()){
+                message = "O seu indicie de massa corporal indica falta de massa"
+            }
+            Column(modifier = modifier) {
+                Text(
+                    text = message,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(20.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
 
     }
 
@@ -124,7 +153,7 @@ fun TextFields(
     }
 }
 
-internal fun calculaImc(peso : Double, altura: Double) : String{
+internal fun calculaImc(peso : Double, altura: Double) : String {
     val result = peso/(altura*altura)
     return NumberFormat.getNumberInstance().format(result)
 }
